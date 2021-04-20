@@ -1,6 +1,7 @@
 package ru.savelchev.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "departments")
@@ -13,9 +14,6 @@ public class Department {
 
     @Column(name = "department_name")
     private String departmentName;
-
-    @Column(name = "middle_salary")
-    private int middleSalary;
 
     public Department() {
     }
@@ -40,13 +38,6 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public int getMiddleSalary() {
-        return middleSalary;
-    }
-
-    public void setMiddleSalary(int middleSalary) {
-        this.middleSalary = middleSalary;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,15 +47,13 @@ public class Department {
         Department that = (Department) o;
 
         if (id != that.id) return false;
-        if (middleSalary != that.middleSalary) return false;
-        return departmentName != null ? departmentName.equals(that.departmentName) : that.departmentName == null;
+        return Objects.equals(departmentName, that.departmentName);
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
-        result = 31 * result + middleSalary;
         return result;
     }
 
@@ -73,7 +62,6 @@ public class Department {
         return "Department{" +
                 "id=" + id +
                 ", departmentName='" + departmentName + '\'' +
-                ", middleSalary=" + middleSalary +
                 '}';
     }
 }

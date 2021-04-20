@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+</head>
+<body>
+<h1>Список департаментов</h1>
+<table>
+    <tr>
+        <th>Наименование</th>
+        <th>Средняя зарплата</th>
+        <th>Сотрудники</th>
+        <th>Удалить</th>
+    </tr>
+    <th:block th:each="department : ${departments}">
+        <tr>
+            <td th:text="${department.getDepartmentName()}"></td>
+            <td>0</td>
+            <!--<td th:text="${department.getMiddleSalary()}"></td> -->
+            <td><a th:href="@{/department/{id}(id=${department.getId()})}">Показать</a></td>
+            <td><a th:href="@{/delete/{id}(id=${department.getId()})}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+
+<br/>
+<hr/>
+
+<a href="/department/new">Создать новый департамент</a>
+</body>
+</html>

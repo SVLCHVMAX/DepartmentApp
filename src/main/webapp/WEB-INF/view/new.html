@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New department</title>
+</head>
+<body>
+<h1>Добавление нового департамента</h1>
+
+<form th:method="POST" th:action = "@{/department}" th:object = "${department}">
+    <label for="name">Введите наименование: </label>
+    <input type="text" th:field = "*{departmentName}" id = "name"/>
+    <br/>
+    <input type="submit" value="Добавить!"/>
+</form>
+</body>
+</html>
