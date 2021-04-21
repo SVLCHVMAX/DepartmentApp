@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.savelchev.dao.DepartmentDAO;
 import ru.savelchev.model.Department;
+import ru.savelchev.model.Employee;
 
 import java.util.List;
 
@@ -27,6 +28,24 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public void save(Department department) {
         departmentDAO.save(department);
+    }
+
+    @Override
+    @Transactional
+    public void deleteDepartment(int id) {
+        departmentDAO.deleteDepartment(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Employee> getEmployees(int id) {
+        return departmentDAO.getEmployees(id);
+    }
+
+    @Override
+    @Transactional
+    public void addEmployee(Employee employee) {
+        departmentDAO.addEmployee(employee);
     }
 
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New employee</title>
+</head>
+<body>
+<h1>Добавление нового сотрудника</h1>
+
+<form th:method="POST" th:action = "@{/department/staff}" th:object = "${employee}">
+    <label for="name">ФИО: </label>
+    <input type="text" th:field = "*{fullName}" id = "name"/>
+    <br/>
+    <label for="birthday">День рождения: </label>
+    <input type="date" th:field = "*{birthday}" id = "birthday"/>
+    <br/>
+    <label for="salary">Зарплата: </label>
+    <input type="number" th:field = "*{salary}" id = "salary"/>
+    <br/>
+    <input type="submit" value="Добавить!"/>
+</form>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package ru.savelchev.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +16,10 @@ public class Department {
 
     @Column(name = "department_name")
     private String departmentName;
+
+    @OneToMany(mappedBy = "department",cascade = {CascadeType.MERGE,CascadeType.PERSIST,
+            CascadeType.DETACH, CascadeType.REFRESH},fetch = FetchType.EAGER)
+    private List<Employee> employeeList;
 
     public Department() {
     }
@@ -38,6 +44,22 @@ public class Department {
         this.departmentName = departmentName;
     }
 
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public void add(Employee employee) {
+
+        if (employeeList==null) {
+            employeeList = new ArrayList<>();
+        }
+        employeeList.add(employee);
+        employee.setDepartment(this);
+    }
 
     @Override
     public boolean equals(Object o) {

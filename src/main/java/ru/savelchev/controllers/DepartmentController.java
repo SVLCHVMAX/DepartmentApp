@@ -3,12 +3,11 @@ package ru.savelchev.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.savelchev.model.Department;
+import ru.savelchev.model.Employee;
 import ru.savelchev.service.DepartmentService;
+import ru.savelchev.service.EmployeeService;
 
 import java.util.List;
 
@@ -42,6 +41,20 @@ public class DepartmentController {
     public String create(@ModelAttribute("department") Department department) {
         departmentService.save(department);
         return "redirect:/department/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id) {
+        departmentService.deleteDepartment(id);
+        return "redirect:/department/list";
+    }
+
+    @GetMapping("/staff/{id}")
+    public String showStaff(@PathVariable("id") int id, Model model) {
+        List<Employee> employeeList = departmentService.getEmployees(id);
+
+        model.addAttribute("staff",employeeList);
+        return "list-staff";
     }
 
 

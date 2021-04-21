@@ -22,7 +22,7 @@ public class Employee {
     private int salary;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH,
-            CascadeType.MERGE,CascadeType.REFRESH})
+            CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
 

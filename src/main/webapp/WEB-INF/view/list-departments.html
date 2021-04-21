@@ -18,8 +18,8 @@
             <td th:text="${department.getDepartmentName()}"></td>
             <td>0</td>
             <!--<td th:text="${department.getMiddleSalary()}"></td> -->
-            <td><a th:href="@{/department/{id}(id=${department.getId()})}">Показать</a></td>
-            <td><a th:href="@{/delete/{id}(id=${department.getId()})}">Delete</a></td>
+            <td><a th:href="@{/department/staff/{id}(id=${department.getId()})}">Показать</a></td>
+            <td><a th:href="@{/department/delete/{id}(id=${department.getId()})}">Delete</a></td>
         </tr>
     </th:block>
 </table>

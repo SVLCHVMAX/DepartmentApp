@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.savelchev.model.Department;
+import ru.savelchev.model.Employee;
 
 import java.util.List;
 
@@ -31,5 +32,25 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
         Session session = sessionFactory.getCurrentSession();
         session.save(department);
+    }
+
+    @Override
+    public void deleteDepartment(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete from Department where id = :departmentId");
+        query.setParameter("departmentId",id);
+        query.executeUpdate();
+    }
+
+    @Override
+    public List<Employee> getEmployees(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Department department = session.get(Department.class,id);
+        return department.getEmployeeList();
+    }
+
+    @Override
+    public void addEmployee(Employee employee) {
+
     }
 }
