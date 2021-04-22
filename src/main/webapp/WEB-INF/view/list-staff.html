@@ -5,7 +5,7 @@
     <title>Staff</title>
 </head>
 <body>
-<h1>Список сотрудников в департаменте</h1>
+<h1>Список всех сотрудников</h1>
 <table>
     <tr>
         <th>Имя</th>
@@ -19,8 +19,8 @@
             <td th:text="${employee.getFullName()}"></td>
             <td th:text="${employee.getBirthday()}"></td>
             <td th:text="${employee.getSalary()}"></td>
-            <td><a th:href="@{/department/staff/{id}(id=${employee.getId()})}">Изменить</a></td>
-            <td><a th:href="@{/department/delete/{id}(id=${employee.getId()})}">Удалить</a></td>
+            <td><a th:href="@{/staff/update/{id}(id=${employee.getId()})}">Изменить</a></td>
+            <td><a th:href="@{/staff/delete/{id}(id=${employee.getId()})}">Удалить</a></td>
         </tr>
     </th:block>
 </table>
@@ -29,5 +29,6 @@
 <hr/>
 
 <a href="/staff/new">Добавить нового сотрудника</a>
+<a href="/department/list">Перейти к списку департаментов</a>
 </body>
 </html>

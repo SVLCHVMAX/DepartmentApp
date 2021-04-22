@@ -42,12 +42,36 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String newEmployee(@ModelAttribute("employee") Employee employee) {
+    public String newEmployee(@ModelAttribute("employee") Employee employee, Model model) {
+        List<Department> departmentList = departmentService.getDepartments();
+        model.addAttribute("departments",departmentList);
         return "new-employee";
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public String createEmployee(@ModelAttribute("employee") Employee employee) {
+        employee.setDepartment(employee.getDepartment());
+        employeeService.save(employee);
+        return "redirect:/staff/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable("id") int id) {
+        employeeService.deleteById(id);
+        return "redirect:/staff/list";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateEmployeeForm(@PathVariable("id") int id,Model model) {
+        Employee employee = employeeService.findById(id);
+        List<Department> departmentList = departmentService.getDepartments();
+        model.addAttribute("departments",departmentList);
+        model.addAttribute("employee",employee);
+        return "update-employee";
+    }
+
+    @PostMapping("/update")
+    public String updateEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.save(employee);
         return "redirect:/staff/list";
     }

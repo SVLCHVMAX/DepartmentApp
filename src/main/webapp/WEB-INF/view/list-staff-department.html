@@ -5,8 +5,7 @@
     <title>Staff</title>
 </head>
 <body>
-<h1>Список сотрудников в департаменте</h1>
-<h1 th:text = "${department.getDepartmentName()}"></h1>
+<h1 th:text = "${'Список сотрудников в департаменте ' + department.getDepartmentName()}"></h1>
 <table>
     <tr>
         <th>Имя</th>
@@ -25,6 +24,6 @@
 <br/>
 <hr/>
 
-<a href="/department/list">Назад к списку департаментов</a>
+<a href="/department/list">Назад</a>
 </body>
 </html>

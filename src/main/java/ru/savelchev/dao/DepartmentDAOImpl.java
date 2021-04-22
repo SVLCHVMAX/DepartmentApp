@@ -37,9 +37,12 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     @Override
     public void deleteDepartment(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("delete from Department where id = :departmentId");
-        query.setParameter("departmentId",id);
-        query.executeUpdate();
+        Query query1 = session.createQuery("delete  from Employee where department.id=:departmentId");
+        Query query2 = session.createQuery("delete from Department where id = :departmentId");
+        query1.setParameter("departmentId",id);
+        query2.setParameter("departmentId",id);
+        query1.executeUpdate();
+        query2.executeUpdate();
     }
 
     @Override

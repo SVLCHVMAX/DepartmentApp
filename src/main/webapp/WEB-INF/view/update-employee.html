@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
 <html lang="en" xmlns:th = "http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +16,8 @@
 <body>
 <h1>Добавление нового сотрудника</h1>
 
-<form th:method="POST" th:action = "@{/staff/new}" th:object = "${employee}">
+<form th:method="POST" th:action = "@{/staff/update}" th:object = "${employee}">
+    <input type="hidden" th:field="*{id}" id="id">
     <label for="name">ФИО: </label>
     <input type="text" th:field = "*{fullName}" id = "name"/>
     <br/>
@@ -23,7 +33,7 @@
     </select>
     <br/>
     <a href="/staff/list">Отмена</a>
-    <input type="submit" value="Добавить!"/>
+    <input type="submit" value="Изменить!"/>
 </form>
 </body>
 </html>

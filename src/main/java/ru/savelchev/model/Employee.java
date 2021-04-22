@@ -16,23 +16,23 @@ public class Employee {
     private String fullName;
 
     @Column(name = "birthday")
-    private Date birthday;
+    private String birthday;
 
     @Column(name = "salary")
     private int salary;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH,
-            CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
 
     public Employee() {
     }
 
-    public Employee(String fullName, Date birthday, int salary) {
+    public Employee(String fullName, String birthday, int salary,Department department) {
         this.fullName = fullName;
         this.birthday = birthday;
         this.salary = salary;
+        this.department = department;
     }
 
     public int getId() {
@@ -51,11 +51,11 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
