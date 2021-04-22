@@ -13,4 +13,5 @@ public interface DepartmentDAO {
     void deleteDepartment(int id);
     List<Employee>  getEmployees(int id);
     void addEmployee(Employee employee);
+    Department findById(int id);
 }

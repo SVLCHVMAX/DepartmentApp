@@ -48,5 +48,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentDAO.addEmployee(employee);
     }
 
+    @Override
+    @Transactional
+    public Department findById(int id) {
+        return departmentDAO.findById(id);
+    }
+
 
 }

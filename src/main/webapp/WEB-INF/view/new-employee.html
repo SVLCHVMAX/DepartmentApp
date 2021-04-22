@@ -7,12 +7,12 @@
 <body>
 <h1>Добавление нового сотрудника</h1>
 
-<form th:method="POST" th:action = "@{/department/staff}" th:object = "${employee}">
+<form th:method="POST" th:action = "@{/staff}" th:object = "${employee}">
     <label for="name">ФИО: </label>
     <input type="text" th:field = "*{fullName}" id = "name"/>
     <br/>
     <label for="birthday">День рождения: </label>
-    <input type="date" th:field = "*{birthday}" id = "birthday"/>
+    <input type="text" th:field = "*{birthday}" id = "birthday"/>
     <br/>
     <label for="salary">Зарплата: </label>
     <input type="number" th:field = "*{salary}" id = "salary"/>

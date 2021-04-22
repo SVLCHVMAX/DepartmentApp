@@ -53,4 +53,10 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     public void addEmployee(Employee employee) {
 
     }
+
+    @Override
+    public Department findById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Department.class,id);
+    }
 }

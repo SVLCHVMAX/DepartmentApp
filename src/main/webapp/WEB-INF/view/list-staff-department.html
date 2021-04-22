@@ -6,21 +6,18 @@
 </head>
 <body>
 <h1>Список сотрудников в департаменте</h1>
+<h1 th:text = "${department.getDepartmentName()}"></h1>
 <table>
     <tr>
         <th>Имя</th>
         <th>День рождения</th>
         <th>Зарплата</th>
-        <th>Изменить</th>
-        <th>Удалить</th>
     </tr>
     <th:block th:each="employee : ${staff}">
         <tr>
             <td th:text="${employee.getFullName()}"></td>
             <td th:text="${employee.getBirthday()}"></td>
             <td th:text="${employee.getSalary()}"></td>
-            <td><a th:href="@{/department/staff/{id}(id=${employee.getId()})}">Изменить</a></td>
-            <td><a th:href="@{/department/delete/{id}(id=${employee.getId()})}">Удалить</a></td>
         </tr>
     </th:block>
 </table>
@@ -28,6 +25,6 @@
 <br/>
 <hr/>
 
-<a href="/staff/new">Добавить нового сотрудника</a>
+<a href="/department/list">Назад к списку департаментов</a>
 </body>
 </html>

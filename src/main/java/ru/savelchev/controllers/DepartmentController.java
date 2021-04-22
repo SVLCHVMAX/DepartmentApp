@@ -49,16 +49,4 @@ public class DepartmentController {
         return "redirect:/department/list";
     }
 
-    @GetMapping("/staff/{id}")
-    public String showStaff(@PathVariable("id") int id, Model model) {
-        List<Employee> employeeList = departmentService.getEmployees(id);
-
-        model.addAttribute("staff",employeeList);
-        return "list-staff";
-    }
-
-
-
-
-
 }
