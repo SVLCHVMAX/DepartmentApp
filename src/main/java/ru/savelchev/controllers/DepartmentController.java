@@ -3,12 +3,14 @@ package ru.savelchev.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.savelchev.model.Department;
 import ru.savelchev.model.Employee;
 import ru.savelchev.service.DepartmentService;
 import ru.savelchev.service.EmployeeService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -38,7 +40,10 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute("department") Department department) {
+    public String create(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new";
+        }
         departmentService.save(department);
         return "redirect:/department/list";
     }

@@ -83,6 +83,13 @@
 		<property name="characterEncoding" value="UTF-8"/>
 	</bean>
 
+	<bean name="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="basename">
+			<value>message</value>
+		</property>
+	</bean>
+
 </beans>
 
 

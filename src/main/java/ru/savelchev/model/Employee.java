@@ -1,6 +1,12 @@
 package ru.savelchev.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
 @Entity
@@ -12,12 +18,19 @@ public class Employee {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "Поле ФИО не должно быть пустым!")
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "birthday")
-    private String birthday;
+    @NotNull(message = "Поле не должно быть пустым!")
+    @Past(message = "Введите корректную дату")
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
+
+    @PositiveOrZero
     @Column(name = "salary")
     private int salary;
 
@@ -28,7 +41,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String fullName, String birthday, int salary,Department department) {
+    public Employee(String fullName, Date birthday, int salary, Department department) {
         this.fullName = fullName;
         this.birthday = birthday;
         this.salary = salary;
@@ -51,11 +64,11 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

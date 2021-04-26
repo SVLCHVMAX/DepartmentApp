@@ -7,6 +7,7 @@ import ru.savelchev.dao.DepartmentDAO;
 import ru.savelchev.model.Department;
 import ru.savelchev.model.Employee;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,9 +23,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     @Transactional
     public List<Department> getDepartments() {
-        return departmentDAO.getDepartments();
+        List<Department> departmentList = departmentDAO.getDepartments();
+        getMiddleSalary(departmentList);
+        return departmentList;
     }
 
+    @Override
     @Transactional
     public void save(Department department) {
         departmentDAO.save(department);
@@ -52,6 +56,24 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public Department findById(int id) {
         return departmentDAO.findById(id);
+    }
+
+    private void getMiddleSalary(List<Department> departmentList) {
+        int middleSalary=0;
+        for(Department department:departmentList) {
+            List<Employee> employeeList = department.getEmployeeList();
+            if (employeeList.size()>0) {
+                for (Employee employee: employeeList) {
+                    middleSalary+=employee.getSalary();
+                }
+                middleSalary = middleSalary/employeeList.size();
+                department.setMiddleSalary(middleSalary);
+            }
+            else {
+                department.setMiddleSalary(0);
+            }
+            middleSalary = 0;
+        }
     }
 
 

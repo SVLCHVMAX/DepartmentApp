@@ -1,6 +1,7 @@
 package ru.savelchev.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,11 +15,17 @@ public class Department {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "Поле не должно быть пустым!")
     @Column(name = "department_name")
     private String departmentName;
 
+    @Column(name="middle_salary")
+    private int middleSalary;
+
     @OneToMany(mappedBy = "department",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Employee> employeeList;
+
+
 
     public Department() {
     }
@@ -33,6 +40,14 @@ public class Department {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getMiddleSalary() {
+        return middleSalary;
+    }
+
+    public void setMiddleSalary(int middleSalary) {
+        this.middleSalary = middleSalary;
     }
 
     public String getDepartmentName() {

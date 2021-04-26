@@ -3,12 +3,14 @@ package ru.savelchev.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.savelchev.model.Department;
 import ru.savelchev.model.Employee;
 import ru.savelchev.service.DepartmentService;
 import ru.savelchev.service.EmployeeService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,7 +51,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/new")
-    public String createEmployee(@ModelAttribute("employee") Employee employee) {
+    public String createEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Department> departmentList = departmentService.getDepartments();
+            model.addAttribute("departments",departmentList);
+            return "new-employee";
+        }
         employee.setDepartment(employee.getDepartment());
         employeeService.save(employee);
         return "redirect:/staff/list";
@@ -71,7 +78,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute("employee") Employee employee) {
+    public String updateEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Department> departmentList = departmentService.getDepartments();
+            model.addAttribute("departments",departmentList);
+            return "update-employee";
+        }
         employeeService.save(employee);
         return "redirect:/staff/list";
     }
